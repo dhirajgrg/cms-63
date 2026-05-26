@@ -1,0 +1,25 @@
+import { Controller } from "react-hook-form";
+import LabelForm from "../ui/LabelForm.tsx";
+import InputForm from "../ui/InputForm.tsx";
+
+const RHFInput = ({ label, labelRight = "", name, control, ...rest }) => {
+  return (
+    <div className="flex flex-col gap-2 mt-4">
+      {(label || labelRight) && (
+        <LabelForm className="flex justify-between items-center">
+          <p>{label}</p>
+          <p className="text-xs text-violet-800 hover:text-violet-500">
+            {labelRight}
+          </p>
+        </LabelForm>
+      )}
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => <InputForm {...field} {...rest} />}
+      />
+    </div>
+  );
+};
+
+export default RHFInput;

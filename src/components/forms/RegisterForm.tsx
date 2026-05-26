@@ -1,10 +1,32 @@
-import LabelForm from "../ui/LabelForm.tsx";
-import InputForm from "../ui/InputForm.tsx";
+import { useForm } from "react-hook-form";
+import RHFInput from "./RHFInput.tsx";
 import Button from "../ui/Button.tsx";
 
+interface IRegisterData{
+  name:string;
+  email:string;
+  password:string;
+  confirmPassword:string;
+}
+
 const RegisterForm = () => {
+  const { control, handleSubmit } = useForm<IRegisterData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const registerSubmit = (data:IRegisterData) => {
+    console.log(data);
+  };
   return (
-    <form className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm mx-auto md:max-w-md mt-10">
+    <form
+      onSubmit={handleSubmit(registerSubmit)}
+      className="bg-white shadow-zinc-400 shadow-md rounded-lg p-6 w-full max-w-sm mx-auto md:max-w-md mt-10"
+    >
       <h1 className="text-center text-2xl font-semibold capitalize">
         Create Administrator Account
       </h1>
@@ -12,42 +34,39 @@ const RegisterForm = () => {
         Initialize your system credentials to begin managing editorial
         workflows.
       </p>
-      <div className="flex flex-col gap-2 mt-4">
-        <LabelForm>Full Name</LabelForm>
-        <InputForm
-          type="text"
-          placeholder="jhon doe"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
-        />
-      </div>
-      <div className="flex flex-col gap-2 mt-4">
-        <LabelForm>Email Address</LabelForm>
-        <InputForm
-          type="email"
-          placeholder="jhon@example..com"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
-        />
-      </div>
-      <div className="flex flex-col gap-2 mt-4">
-        <LabelForm className="flex justify-between items-center">
-          password
-        </LabelForm>
-        <InputForm
-          type="password"
-          placeholder="password"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
-        />
-      </div>
-      <div className="flex flex-col gap-2 mt-4">
-        <LabelForm className="flex justify-between items-center">
-          confirm password
-        </LabelForm>
-        <InputForm
-          type="password"
-          placeholder="confirm password"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
-        />
-      </div>
+      <RHFInput
+        control={control}
+        name="name"
+        label="Full Name"
+        type="text"
+        placeholder="Jhon Doe"
+        className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+      />
+      <RHFInput
+        control={control}
+        name="email"
+        label="Email Address"
+        type="email"
+        placeholder="jhon@example.com"
+        className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+      />
+      <RHFInput
+        control={control}
+        name="password"
+        label="Password"
+        type="password"
+        placeholder="password"
+        className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+      />
+      <RHFInput
+        control={control}
+        name="confirmPassword"
+        label="Confirm Password"
+        type="password"
+        placeholder="password"
+        className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+      />
+
       <div className="flex justify-center mt-2">
         <Button
           type="submit"
@@ -60,7 +79,7 @@ const RegisterForm = () => {
       <div className="text-center mt-4 text-xs">
         <p>
           Already have an administrator account?{" "}
-            <span className="text-violet-800">Sign In</span>
+          <span className="text-violet-800">Sign In</span>
         </p>
       </div>
     </form>

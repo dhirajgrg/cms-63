@@ -1,36 +1,53 @@
 
-import LabelForm from "../ui/LabelForm.tsx";
-import InputForm from "../ui/InputForm.tsx";
 import Button from "../ui/Button.tsx";
+import { useForm } from "react-hook-form";
+import RHFInput from "./RHFInput.tsx";
+
+interface ILoginData {
+  email: string;
+  password: string;
+}
 
 const LoginForm = () => {
+  const { control, handleSubmit } = useForm<ILoginData>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const LoginSubmit = (data: ILoginData) => {
+    console.log(data);
+  };
   return (
-    <form className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm mx-auto md:max-w-md mt-10">
+    <form
+      onSubmit={handleSubmit(LoginSubmit)}
+      className=" shadow-md shadow-zinc-400 rounded-lg p-6 w-full max-w-sm mx-auto md:max-w-md mt-10"
+    >
       <h1 className="text-center text-2xl font-semibold capitalize">
         Editorial Studio
       </h1>
       <p className="pt-1 text-center text-xs  mb-6">
         Acess your modernCMS workspace
       </p>
-      <div className="flex flex-col gap-2 mt-4">
-        <LabelForm>Email Address</LabelForm>
-        <InputForm
-          type="email"
-          placeholder="jhon@example..com"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
-        />
-      </div>
-      <div className="flex flex-col gap-2 mt-4">
-        <LabelForm className="flex justify-between items-center">
-          <p>Password</p>
-          <p className="text-xs text-violet-800">Forget password?</p>
-        </LabelForm>
-        <InputForm
-          type="password"
-          placeholder="password"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
-        />
-      </div>
+      <RHFInput
+        control={control}
+        name="email"
+        label="Email Address"
+        type="email"
+        placeholder="jhon@example.com"
+        className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+      />
+      <RHFInput
+        control={control}
+        name="password"
+        label="Password"
+        labelRight="Forget password?"
+        type="password"
+        placeholder="password"
+        className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+      />
+    
       <div className="flex justify-center mt-2">
         <Button
           type="submit"

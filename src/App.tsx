@@ -1,10 +1,10 @@
+import AppRoute from "./routes/AppRoute.tsx";
 
-import Navbar from "./components/navbar/Navbar.tsx";
 function App() {
   return (
-    <div>
-      <Navbar />
-    </div>
+    <>
+      <AppRoute />
+    </>
   );
 }
 
