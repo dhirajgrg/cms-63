@@ -6,9 +6,9 @@ const RHFInput = ({ label, labelRight = "", name, control,message, ...rest }) =>
   return (
     <div className="flex flex-col gap-2 mt-4">
       {(label || labelRight) && (
-        <LabelForm className="flex justify-between items-center">
+        <LabelForm className="flex justify-between items-center text-sm text-neutral font-inter">
           <p>{label}</p>
-          <p className="text-xs text-violet-800 hover:text-violet-500">
+          <p className="text-xs text-violet-800 hover:text-violet-500 cursor-pointer">
             {labelRight}
           </p>
         </LabelForm>

@@ -52,10 +52,10 @@ const RegisterForm = () => {
         onSubmit={handleSubmit(registerSubmit)}
         className="bg-white shadow-zinc-400 shadow-md rounded-lg p-6 w-full max-w-sm mx-auto md:max-w-md mt-10"
       >
-        <h1 className="text-center text-2xl font-semibold capitalize">
+        <h1 className="text-center text-2xl font-semibold capitalize text-neutral font-playfair">
           Create Administrator Account
         </h1>
-        <p className="pt-1 text-center text-xs  mb-6">
+        <p className="pt-1 text-center text-xs  mb-6 text-neutral font-inter px-10">
           Initialize your system credentials to begin managing editorial
           workflows.
         </p>
@@ -66,7 +66,7 @@ const RegisterForm = () => {
           label="Full Name"
           type="text"
           placeholder="Jhon Doe"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
         />
         <RHFInput
           message={errors?.email?.message}
@@ -75,7 +75,7 @@ const RegisterForm = () => {
           label="Email Address"
           type="email"
           placeholder="jhon@example.com"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
         />
         <RHFInput
           message={errors?.password?.message}
@@ -84,7 +84,7 @@ const RegisterForm = () => {
           label="Password"
           type="password"
           placeholder="password"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
         />
         <RHFInput
           message={errors?.confirmPassword?.message}
@@ -93,13 +93,13 @@ const RegisterForm = () => {
           label="Confirm Password"
           type="password"
           placeholder="password"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg "
+          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
         />
 
         <div className="flex justify-center mt-2">
           <Button
             type="submit"
-            className="bg-violet-800  hover:bg-violet-600 text-zinc-50 rounded-full px-6 py-1 md:py-2 md:px-10 hover:-translate-y-0.5 active:translate-y-0.5  transition-all duration-100 mt-4"
+            className="cursor-pointer bg-violet-800  hover:bg-violet-600 text-tertiary rounded-full px-6 py-1 md:py-2 md:px-10 hover:-translate-y-0.5 active:translate-y-0.5  transition-all duration-100 mt-4 text-xs font-inter"
           >
             Register
           </Button>
