@@ -1,9 +1,8 @@
 import Para from "../../components/ui/Para.tsx";
-import Menu from "../../components/ui/Menu.tsx";
-import { Outlet } from "react-router";
+import { NavLink, Outlet } from "react-router";
 
 const DashboardMenu = [
-  { title: "Dashboard", link: "/admin/dashboard" },
+  { title: "Dashboard", link: "/admin" },
   { title: "Content", link: "/admin/content" },
   { title: "Analytics", link: "/admin/analytics" },
   { title: "Users", link: "/admin/users" },
@@ -13,22 +12,30 @@ const DashboardMenu = [
 const AdminLayout = () => {
   return (
     <div className="flex bg-orange-50 p-10 h-screen">
-      <aside className="md:w-1/3 border-r-zinc-200 border-r ">
+      <aside className="md:w-1/4 border-r-zinc-200 border-r-2  ">
         <h1 className="text-2xl font-semibold">Editoriol Studio</h1>
         <Para>System Administratir</Para>
         <div className="flex flex-col gap-2 mt-4">
           {DashboardMenu.map((menu) => (
-            <Menu
+            <NavLink
               to={menu.link}
               key={menu.title}
-              className="mr-2 font-medium text-zinc-700 hover:text-violet-500 transition-colors duration-200 text-sm  hover:bg-zinc-200  focus:bg-zinc-200  focus:border-l-2 focus:border-l-violet-500 focus:text-violet-600 py-2 px-4 "
+              end={menu.link === "/admin"}
+              className={({ isActive }) =>
+                `hover:-translate-y-0.5 transition-all duration-75 focus:underline underline-offset-4
+                ${
+                  isActive
+                    ? "text-violet-600 bg-zinc-200 px-2 py-2 rounded mr-4 border-l-violet-600 border-l-4 underline transition-all duration-200"
+                    : "text-zinc-800 hover:text-violet-400 px-2 py-2"
+                }`
+              }
             >
               {menu.title}
-            </Menu>
+            </NavLink>
           ))}
         </div>
       </aside>
-      <section className="w-2/3 p-10">
+      <section className="w-full p-10">
         <Outlet />
       </section>
     </div>

@@ -2,7 +2,7 @@ import { Controller } from "react-hook-form";
 import LabelForm from "../ui/LabelForm.tsx";
 import InputForm from "../ui/InputForm.tsx";
 
-const RHFInput = ({ label, labelRight = "", name, control, ...rest }) => {
+const RHFInput = ({ label, labelRight = "", name, control,message, ...rest }) => {
   return (
     <div className="flex flex-col gap-2 mt-4">
       {(label || labelRight) && (
@@ -18,6 +18,7 @@ const RHFInput = ({ label, labelRight = "", name, control, ...rest }) => {
         name={name}
         render={({ field }) => <InputForm {...field} {...rest} />}
       />
+      <span className="text-red-500 text-xs itallic">{message}</span>
     </div>
   );
 };
