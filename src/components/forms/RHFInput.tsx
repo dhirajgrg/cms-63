@@ -1,8 +1,31 @@
-import { Controller } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type FieldValues,
+  type Path,
+} from "react-hook-form";
 import LabelForm from "../ui/LabelForm.tsx";
 import InputForm from "../ui/InputForm.tsx";
+import type { InputHTMLAttributes } from "react";
 
-const RHFInput = ({ label, labelRight = "", name, control,message, ...rest }) => {
+interface IInputProps<
+  T extends FieldValues,
+> extends InputHTMLAttributes<HTMLInputElement> {
+  control: Control<T>;
+  name: Path<T>;
+  label?: string;
+  labelRight?: string;
+  message?: string;
+}
+
+const RHFInput = <T extends FieldValues>({
+  control,
+  label,
+  labelRight,
+  name,
+  message,
+  ...rest
+}: Readonly<IInputProps<T>>) => {
   return (
     <div className="flex flex-col gap-2 mt-4">
       {(label || labelRight) && (
@@ -18,7 +41,7 @@ const RHFInput = ({ label, labelRight = "", name, control,message, ...rest }) =>
         name={name}
         render={({ field }) => <InputForm {...field} {...rest} />}
       />
-      <span className="text-red-500 text-xs itallic">{message}</span>
+      <span className="text-red-500 text-xs italic">{message}</span>
     </div>
   );
 };

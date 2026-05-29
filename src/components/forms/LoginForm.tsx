@@ -1,16 +1,9 @@
 import Button from "../ui/Button.tsx";
 import { useForm } from "react-hook-form";
 import RHFInput from "./RHFInput.tsx";
-import z from "zod";
+import { LoginSchema, type ILoginData } from "../../types/loginTypes.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NavLink } from "react-router";
-
-const LoginSchema = z.object({
-  email: z.email().trim(),
-  password: z.string().min(1,"password required"),
-});
-
-type ILoginData = z.infer<typeof LoginSchema>;
 
 const LoginForm = () => {
   const {
@@ -72,7 +65,9 @@ const LoginForm = () => {
         <div className="text-center mt-4 text-xs">
           <p>
             New to the platform?
-            <NavLink to="/register" className="text-violet-800 cursor-pointer">Register your account</NavLink>
+            <NavLink to="/register" className="text-violet-800 cursor-pointer">
+              Register your account
+            </NavLink>
           </p>
         </div>
       </form>

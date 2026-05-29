@@ -9,6 +9,7 @@ import Editorial from "../pages/Editorial.tsx";
 import Enterprise from "../pages/Enterprise.tsx";
 import MainLayout from "../pages/layouts/MainLayout.tsx";
 import Home from "../pages/Home.tsx";
+import CreateProduct from "../pages/CreateProduct.tsx";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,9 @@ const router = createBrowserRouter([
       { path: "analytics", element: <h1>analytics</h1> },
       { path: "users", element: <h1>users</h1> },
       { path: "settings", element: <h1>settings</h1> },
+      { path: "create", element: <CreateProduct/> },
       { path: "*", element: <NotFound /> },
+      
     ],
   },
   { path: "*", element: <NotFound /> },

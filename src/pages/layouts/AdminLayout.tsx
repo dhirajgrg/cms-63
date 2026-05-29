@@ -7,6 +7,7 @@ const DashboardMenu = [
   { title: "Analytics", link: "/admin/analytics" },
   { title: "Users", link: "/admin/users" },
   { title: "Settings", link: "/admin/settings" },
+  { title: "Create", link: "/admin/create" },
 ];
 
 const AdminLayout = () => {
