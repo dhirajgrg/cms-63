@@ -10,8 +10,9 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    if (+error.status === 400) {
-      throw error.response.data;
+    if (+error.response?.status === 400) {
+      throw error.response?.data;
+      
     }
   },
 );

@@ -16,6 +16,7 @@ const RegisterForm = () => {
   } = useForm<IRegisterData>({
     defaultValues: {
       name: "",
+      username:"",
       email: "",
       password: "",
       confirmPassword: "",
@@ -27,15 +28,15 @@ const RegisterForm = () => {
     console.log(data);
   };
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="py-16 flex justify-center items-center">
       <form
         onSubmit={handleSubmit(registerSubmit)}
-        className="bg-white shadow-zinc-400 shadow-md rounded-lg p-6 w-full max-w-sm mx-auto md:max-w-md mt-10"
+        className="bg-white shadow-zinc-400 shadow-md rounded-lg px-10 py-6 w-full max-w-sm mx-auto md:max-w-md "
       >
         <h1 className="text-center text-2xl font-semibold capitalize text-neutral font-playfair">
           Create Administrator Account
         </h1>
-        <p className="pt-1 text-center text-xs  mb-6 text-neutral font-inter px-10">
+        <p className=" text-center text-xs   text-neutral font-inter px-10">
           Initialize your system credentials to begin managing editorial
           workflows.
         </p>
@@ -43,16 +44,25 @@ const RegisterForm = () => {
           message={errors?.name?.message}
           control={control}
           name="name"
-          label="Full Name"
+          label="Full Name : "
           type="text"
           placeholder="Jhon Doe"
+          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
+        />
+        <RHFInput
+          message={errors?.name?.message}
+          control={control}
+          name="username"
+          label="User Name : "
+          type="text"
+          placeholder="username"
           className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
         />
         <RHFInput
           message={errors?.email?.message}
           control={control}
           name="email"
-          label="Email Address"
+          label="Email Address : "
           type="email"
           placeholder="jhon@example.com"
           className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
@@ -61,7 +71,7 @@ const RegisterForm = () => {
           message={errors?.password?.message}
           control={control}
           name="password"
-          label="Password"
+          label="Password : "
           type="password"
           placeholder="password"
           className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
@@ -70,7 +80,7 @@ const RegisterForm = () => {
           message={errors?.confirmPassword?.message}
           control={control}
           name="confirmPassword"
-          label="Confirm Password"
+          label="Confirm Password : "
           type="password"
           placeholder="password"
           className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"

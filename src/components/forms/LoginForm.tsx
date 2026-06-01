@@ -4,8 +4,10 @@ import RHFInput from "./RHFInput.tsx";
 import { LoginSchema, type ILoginData } from "../../types/loginTypes.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NavLink, useNavigate } from "react-router";
-import axiosInstance from "../../api/axios.ts";
+import axiosInstance from "../../lib/api/axios.ts";
 import Cookies from "js-cookie";
+import { toast } from "sonner";
+import { unknown } from "zod";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -27,43 +29,47 @@ const LoginForm = () => {
         "/auth/login",
         data,
       )) as unknown as { accessToken: string };
+      
       Cookies.set("cookie", response.accessToken, {
         secure: true,
         sameSite: "strict",
         expires: 1,
       });
 
+      toast.success("Login Successfully!!!");
       navigate("/admin");
+
     } catch (error) {
       console.log(error);
+      toast.error(error.message);
     }
   };
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="py-16 flex justify-center items-center">
       <form
         onSubmit={handleSubmit(LoginSubmit)}
-        className=" shadow-md shadow-zinc-400 rounded-lg p-6 w-full max-w-sm mx-auto md:max-w-md mt-10"
+        className=" shadow-md shadow-zinc-400 rounded-lg p-6 w-full max-w-sm mx-auto md:max-w-md "
       >
         <h1 className="text-center text-2xl font-semibold capitalize font-playfair text-neutral ">
           Editorial Studio
         </h1>
-        <p className="pt-1 text-center text-xs  mb-6 font-inter text-neutral">
+        <p className=" text-center text-xs   font-inter text-neutral">
           Acess your modernCMS workspace
         </p>
         <RHFInput
           message={errors?.username?.message}
           control={control}
           name="username"
-          label="User Name"
+          label="User Name : "
           type="text"
-          placeholder="jhon@example.com"
+          placeholder="username"
           className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm font-inter text-neutral  "
         />
         <RHFInput
           message={errors?.password?.message}
           control={control}
           name="password"
-          label="Password"
+          label="Password : "
           labelRight="Forget password?"
           type="password"
           placeholder="password"

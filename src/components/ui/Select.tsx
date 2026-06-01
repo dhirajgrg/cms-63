@@ -28,19 +28,15 @@ const Select = <T extends FieldValues>({
   ...rest
 }: Readonly<ISelectProps<T>>) => {
   return (
-    <div >
-      <LabelForm htmlFor="tags">Select a category : </LabelForm>
+    <div>
+      <LabelForm>Select a category : </LabelForm>
       <Controller
         control={control}
         name={name}
         render={({ field }) => (
-          <select id={name} {...field} {...rest} >
+          <select id={name} {...field} {...rest}>
             {options.map((item) => (
-              <option
-                key={item.title}
-                value={item.value}
-            
-              >
+              <option key={item.title} value={item.value}>
                 {item.title}
               </option>
             ))}

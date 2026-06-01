@@ -6,6 +6,7 @@ export const RegisterSchema = z
       .string()
       .min(3, "name must be minimum  3 character long")
       .max(30, "name must not exceed 30 character long"),
+    username: z.string().nonempty().min(3,"username must be minimum 3 character long"),
     email: z.email(),
     password: z
       .string()
