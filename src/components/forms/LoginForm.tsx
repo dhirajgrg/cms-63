@@ -3,23 +3,40 @@ import { useForm } from "react-hook-form";
 import RHFInput from "./RHFInput.tsx";
 import { LoginSchema, type ILoginData } from "../../types/loginTypes.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import axiosInstance from "../../api/axios.ts";
+import Cookies from "js-cookie";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginData>({
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
     resolver: zodResolver(LoginSchema),
   });
 
-  const LoginSubmit = (data: ILoginData) => {
-    console.log(data);
+  const LoginSubmit = async (data: ILoginData) => {
+    try {
+      const response = (await axiosInstance.post(
+        "/auth/login",
+        data,
+      )) as unknown as { accessToken: string };
+      Cookies.set("cookie", response.accessToken, {
+        secure: true,
+        sameSite: "strict",
+        expires: 1,
+      });
+
+      navigate("/admin");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="h-screen flex justify-center items-center">
@@ -34,11 +51,11 @@ const LoginForm = () => {
           Acess your modernCMS workspace
         </p>
         <RHFInput
-          message={errors?.email?.message}
+          message={errors?.username?.message}
           control={control}
-          name="email"
-          label="Email Address"
-          type="email"
+          name="username"
+          label="User Name"
+          type="text"
           placeholder="jhon@example.com"
           className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm font-inter text-neutral  "
         />

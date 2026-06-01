@@ -1,7 +1,7 @@
-import z from 'zod';
+import z from "zod";
 
 export const LoginSchema = z.object({
-  email: z.email().trim(),
+  username: z.string().trim(),
   password: z.string().min(1, "password required"),
 });
 
