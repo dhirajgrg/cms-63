@@ -1,5 +1,6 @@
 import Para from "../../components/ui/Para.tsx";
 import { NavLink, Outlet } from "react-router";
+import useUser from "../../lib/hooks/useUser.tsx";
 
 const DashboardMenu = [
   { title: "Dashboard", link: "/admin" },
@@ -11,11 +12,25 @@ const DashboardMenu = [
 ];
 
 const AdminLayout = () => {
+  const { loggedInUser } = useUser();
+  
+  console.log(loggedInUser);
   return (
-    <div className="flex bg-orange-50 p-10 h-screen">
-      <aside className="md:w-1/4 border-r-zinc-200 border-r-2  ">
-        <h1 className="text-2xl font-semibold font-playfair text-neutral">Editoriol Studio</h1>
-        <Para className="text-neutral font-inter text-sm">System Administratir</Para>
+    <div className="relative flex bg-orange-50 p-10 h-screen">
+      <div className="flex flex-col items-center justify-center text-right absolute right-6 top-4">
+        <img 
+        className="w-16 h-16 object-cover object-center"
+        src={loggedInUser?.image} alt="profile-pic" />
+        <p className="text-xs font-inter font-semibold">{loggedInUser?.firstName}</p>
+      </div>
+
+      <aside className="w-full md:w-1/4 border-r-zinc-200 border-r-2  ">
+        <h1 className="text-2xl font-semibold font-playfair text-neutral">
+          Editoriol Studio
+        </h1>
+        <Para className="text-neutral font-inter text-sm">
+          System Administratir
+        </Para>
         <div className="flex flex-col gap-2 mt-4">
           {DashboardMenu.map((menu) => (
             <NavLink
@@ -36,6 +51,7 @@ const AdminLayout = () => {
           ))}
         </div>
       </aside>
+
       <section className="w-full p-10">
         <Outlet />
       </section>

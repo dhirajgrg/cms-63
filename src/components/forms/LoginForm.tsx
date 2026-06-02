@@ -4,13 +4,13 @@ import RHFInput from "./RHFInput.tsx";
 import { LoginSchema, type ILoginData } from "../../types/loginTypes.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NavLink, useNavigate } from "react-router";
-import axiosInstance from "../../lib/api/axios.ts";
-import Cookies from "js-cookie";
 import { toast } from "sonner";
-import { unknown } from "zod";
+import useUser from "../../lib/hooks/useUser.tsx";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { login } = useUser();
+
   const {
     control,
     handleSubmit,
@@ -25,25 +25,14 @@ const LoginForm = () => {
 
   const LoginSubmit = async (data: ILoginData) => {
     try {
-      const response = (await axiosInstance.post(
-        "/auth/login",
-        data,
-      )) as unknown as { accessToken: string };
-      
-      Cookies.set("cookie", response.accessToken, {
-        secure: true,
-        sameSite: "strict",
-        expires: 1,
-      });
-
-      toast.success("Login Successfully!!!");
+      const response = await login(data);
+   
       navigate("/admin");
-
     } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      toast.error(error);
     }
   };
+
   return (
     <div className="py-16 flex justify-center items-center">
       <form
