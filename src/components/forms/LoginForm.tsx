@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { NavLink, useNavigate } from "react-router";
 import { toast } from "sonner";
 import useUser from "../../lib/hooks/useUser.tsx";
+import axios from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -26,10 +27,19 @@ const LoginForm = () => {
   const LoginSubmit = async (data: ILoginData) => {
     try {
       const response = await login(data);
-   
+      console.log(response)
+      toast.success('Login successful!')
       navigate("/admin");
     } catch (error) {
-      toast.error(error);
+      if(axios.isAxiosError(error)){
+        toast.error(error.response?.data )
+      } 
+      else if(error instanceof Error){
+        toast.error(error.message)
+      }
+      else {
+        toast.error('something went very wrong!!!')
+      }
     }
   };
 

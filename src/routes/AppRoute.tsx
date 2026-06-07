@@ -10,6 +10,7 @@ import Enterprise from "../pages/Enterprise.tsx";
 import MainLayout from "../pages/layouts/MainLayout.tsx";
 import Home from "../pages/Home.tsx";
 import CreatePost from "../pages/CreatePost.tsx";
+import CheckPermission from "../components/permission/CheckPermission.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    Component: AdminLayout,
+    element:<CheckPermission><AdminLayout/></CheckPermission>
+    ,
     children: [
       { index: true, element: <h1>Dashboard</h1> },
       { path: "content", element: <h1>content</h1> },

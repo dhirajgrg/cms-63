@@ -9,6 +9,9 @@ const AuthProvider = ({ children }: Readonly<{ children: ReactNode }>) => {
   const [loggedInUser, setLoggedInUser] = useState<null | IUserProfileTypes>(
     null,
   );
+  const [loading, setLoading] = useState<boolean>(() => {
+    return !!Cookies.get("cookie");
+  });
   //get user details
   const getLoggedInUser = async () => {
     try {
@@ -18,9 +21,12 @@ const AuthProvider = ({ children }: Readonly<{ children: ReactNode }>) => {
         },
       })) as IUserProfileTypes;
       setLoggedInUser(userProfile);
+
       return userProfile;
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,25 +46,34 @@ const AuthProvider = ({ children }: Readonly<{ children: ReactNode }>) => {
       return await getLoggedInUser();
     } catch (error) {
       console.log(error);
+      throw error;
     }
   };
 
-  useEffect(() => {
-    const handler = () => {
-      const cookie = Cookies.get("cookie") || null;
-      if (cookie) {
-        getLoggedInUser();
-      }
-    };
-    return () => {
-      handler();
-    };
-  }, []);
+useEffect(() => {
+  const handler = async () => {
+    const cookie = Cookies.get("cookie")||null;
+
+    if (cookie) {
+      await getLoggedInUser();
+    } else {
+      setLoading(false);
+    }
+  };
+
+  handler();
+}, []);
+
+  if (loading) {
+    return <p>loading...</p>;
+  }
+
   return (
     <AuthContext.Provider
       value={{
         login: login,
         loggedInUser,
+        loading,
       }}
     >
       {children}

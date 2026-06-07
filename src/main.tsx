@@ -7,8 +7,8 @@ import AuthProvider from "./lib/provider/AuthProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <Toaster richColors />
     <AuthProvider>
-      <Toaster richColors />
       <App />
     </AuthProvider>
   </StrictMode>,
