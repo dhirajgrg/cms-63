@@ -11,6 +11,10 @@ import MainLayout from "../pages/layouts/MainLayout.tsx";
 import Home from "../pages/Home.tsx";
 import CreatePost from "../pages/CreatePost.tsx";
 import CheckPermission from "../components/permission/CheckPermission.tsx";
+import Content from "../pages/admin/Content.tsx";
+import Analytics from "../pages/admin/Analytics.tsx";
+import Users from "../pages/admin/Users.tsx";
+import Settings from "../pages/admin/Settings.tsx";
 
 const router = createBrowserRouter([
   {
@@ -28,17 +32,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element:<CheckPermission><AdminLayout/></CheckPermission>
-    ,
+    element: (
+      <CheckPermission>
+        <AdminLayout />
+      </CheckPermission>
+    ),
     children: [
       { index: true, element: <h1>Dashboard</h1> },
-      { path: "content", element: <h1>content</h1> },
-      { path: "analytics", element: <h1>analytics</h1> },
-      { path: "users", element: <h1>users</h1> },
-      { path: "settings", element: <h1>settings</h1> },
-      { path: "create", element: <CreatePost/> },
+      { path: "content", element: <Content /> },
+      { path: "analytics", element: <Analytics /> },
+      { path: "users", element: <Users /> },
+      { path: "settings", element: <Settings /> },
       { path: "*", element: <NotFound /> },
-      
     ],
   },
   { path: "*", element: <NotFound /> },

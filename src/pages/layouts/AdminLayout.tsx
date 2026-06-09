@@ -1,27 +1,41 @@
-import Para from "../../components/ui/Para.tsx";
+import type { ReactNode } from "react";
 import { NavLink, Outlet } from "react-router";
-import useUser from "../../lib/hooks/useUser.tsx";
+import { AiFillDashboard } from "react-icons/ai";
+import { DiGoogleAnalytics } from "react-icons/di";
+import { FaUsers } from "react-icons/fa6";
+import { IoSettings } from "react-icons/io5";
+import { PiTreeStructureFill } from "react-icons/pi";
 
-const DashboardMenu = [
-  { title: "Dashboard", link: "/admin" },
-  { title: "Content", link: "/admin/content" },
-  { title: "Analytics", link: "/admin/analytics" },
-  { title: "Users", link: "/admin/users" },
-  { title: "Settings", link: "/admin/settings" },
-  { title: "Create", link: "/admin/create" },
+import useUser from "../../lib/hooks/useUser.tsx";
+import Para from "../../components/ui/Para.tsx";
+
+interface IDashboardMenus {
+  title: string;
+  link: string;
+  icon: ReactNode;
+  subMenus?: Array<{
+    title: string;
+    link: string;
+    icon: ReactNode;
+  }> | null;
+}
+
+const DashboardMenu: Array<IDashboardMenus> = [
+  { title: "Dashboard", link: "/admin", icon: <AiFillDashboard /> },
+  { title: "Content", link: "/admin/content", icon: <PiTreeStructureFill /> },
+  { title: "Analytics", link: "/admin/analytics", icon: <DiGoogleAnalytics /> },
+  { title: "Users", link: "/admin/users", icon: <FaUsers /> },
+  { title: "Settings", link: "/admin/settings", icon: <IoSettings /> },
 ];
 
 const AdminLayout = () => {
   const { loggedInUser } = useUser();
-  
-  console.log(loggedInUser);
   return (
     <div className="relative flex bg-orange-50 p-10 h-screen">
       <div className="flex flex-col items-center justify-center text-right absolute right-6 top-4">
-        <img 
-        className="w-16 h-16 object-cover object-center"
-        src={loggedInUser?.image} alt="profile-pic" />
-        <p className="text-xs font-inter font-semibold">{loggedInUser?.firstName}</p>
+        <p className="text-xs font-inter font-semibold">
+          {loggedInUser?.firstName}
+        </p>
       </div>
 
       <aside className="w-full md:w-1/4 border-r-zinc-200 border-r-2  ">
@@ -32,23 +46,25 @@ const AdminLayout = () => {
           System Administratir
         </Para>
         <div className="flex flex-col gap-2 mt-4">
-          {DashboardMenu.map((menu) => (
-            <NavLink
-              to={menu.link}
-              key={menu.title}
-              end={menu.link === "/admin"}
-              className={({ isActive }) =>
-                `hover:-translate-y-0.5 transition-all  duration-75 focus:underline underline-offset-4 text-neutral font-inter text-sm
+          {DashboardMenu &&
+            DashboardMenu.map((menu) => (
+              <NavLink
+                to={menu.link}
+                key={menu.title}
+                end={menu.link === "/admin"}
+                className={({ isActive }) =>
+                  ` flex items-center gap-2 hover:-translate-y-0.5 transition-all  duration-75 focus:underline underline-offset-4 text-neutral font-inter text-sm
                 ${
                   isActive
                     ? "text-violet-600 bg-zinc-200 px-2 py-2 rounded mr-4 border-l-violet-600 border-l-4 underline transition-all duration-200"
                     : "text-zinc-800 hover:text-violet-400 px-2 py-2"
                 }`
-              }
-            >
-              {menu.title}
-            </NavLink>
-          ))}
+                }
+              >
+                {menu.icon}
+                {menu.title}
+              </NavLink>
+            ))}
         </div>
       </aside>
 
