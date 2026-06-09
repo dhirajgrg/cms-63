@@ -17,7 +17,7 @@ const options = [
   { title: "Design & Creative", value: "design" },
 ];
 
-const CreateProduct = () => {
+const CreatePost = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
       title: "",
@@ -49,7 +49,7 @@ const CreateProduct = () => {
         label="description :"
         type="text"
         placeholder="description"
-        className=" w-fit outline outline-zinc-200 px-2 py-1 rounded-lg text-sm mb-2 text-neutral font-inter focus:outline-violet-400"
+        className=" w-fit outline  outline-zinc-200 px-2 py-1 rounded-lg text-sm mb-2 text-neutral font-inter focus:outline-violet-400"
       />
       <Select
         control={control}
@@ -103,4 +103,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default CreatePost;

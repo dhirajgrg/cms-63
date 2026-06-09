@@ -8,6 +8,7 @@ import { PiTreeStructureFill } from "react-icons/pi";
 
 import useUser from "../../lib/hooks/useUser.tsx";
 import Para from "../../components/ui/Para.tsx";
+import { FaUserCircle } from "react-icons/fa";
 
 interface IDashboardMenus {
   title: string;
@@ -31,14 +32,8 @@ const DashboardMenu: Array<IDashboardMenus> = [
 const AdminLayout = () => {
   const { loggedInUser } = useUser();
   return (
-    <div className="relative flex bg-orange-50 p-10 h-screen">
-      <div className="flex flex-col items-center justify-center text-right absolute right-6 top-4">
-        <p className="text-xs font-inter font-semibold">
-          {loggedInUser?.firstName}
-        </p>
-      </div>
-
-      <aside className="w-full md:w-1/4 border-r-zinc-200 border-r-2  ">
+    <div className=" flex bg-orange-50  ">
+      <aside className="w-full md:w-1/4 border-r-zinc-200 border-r-2 px-4 py-6 ">
         <h1 className="text-2xl font-semibold font-playfair text-neutral">
           Editoriol Studio
         </h1>
@@ -68,7 +63,11 @@ const AdminLayout = () => {
         </div>
       </aside>
 
-      <section className="w-full p-10">
+      <section className="w-full flex flex-col px-4 py-4">
+        <div className="flex items-center gap-2 self-end text-right border border-zinc-300 px-4 py-1 rounded-full text-xs mb-2">
+          <FaUserCircle/>
+          <p className=" border-zinc-300">{loggedInUser?.username}</p>
+        </div>
         <Outlet />
       </section>
     </div>

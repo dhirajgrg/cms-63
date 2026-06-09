@@ -1,5 +1,6 @@
-import Button from "../ui/Button.tsx";
 import { NavLink } from "react-router";
+
+import Button from "../ui/Button.tsx";
 
 const menus = [
   { title: "Home", link: "/" },
