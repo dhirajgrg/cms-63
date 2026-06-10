@@ -17,6 +17,7 @@ interface ISelectProps<
 > extends SelectHTMLAttributes<HTMLSelectElement> {
   control: Control<T>;
   name: Path<T>;
+  message?: string;
   className: string;
   options: SelectOptions[];
 }
@@ -24,12 +25,17 @@ interface ISelectProps<
 const Select = <T extends FieldValues>({
   control,
   name,
+  message,
   options,
   ...rest
 }: Readonly<ISelectProps<T>>) => {
   return (
-    <div>
-      <LabelForm>Select a category : </LabelForm>
+    <div className="flex items-center">
+      <LabelForm className="w-1/3 ">
+        <p>
+          Select Category :<sup className="text-red-600">*</sup>
+        </p>
+      </LabelForm>
       <Controller
         control={control}
         name={name}
@@ -43,6 +49,9 @@ const Select = <T extends FieldValues>({
           </select>
         )}
       />
+      <span className="text-red-500 text-xs italic capitalize ml-2">
+        {message}
+      </span>
     </div>
   );
 };

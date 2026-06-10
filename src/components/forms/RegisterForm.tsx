@@ -16,7 +16,7 @@ const RegisterForm = () => {
   } = useForm<IRegisterData>({
     defaultValues: {
       name: "",
-      username:"",
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -31,12 +31,12 @@ const RegisterForm = () => {
     <div className="py-16 flex justify-center items-center">
       <form
         onSubmit={handleSubmit(registerSubmit)}
-        className="bg-white shadow-zinc-400 shadow-md rounded-lg px-10 py-6 w-full max-w-sm mx-auto md:max-w-md "
+        className="bg-white shadow-zinc-400 shadow-md rounded-lg px-10 py-6 w-full max-w-md mx-auto md:max-w-2xl "
       >
         <h1 className="text-center text-2xl font-semibold capitalize text-neutral font-playfair">
           Create Administrator Account
         </h1>
-        <p className=" text-center text-xs   text-neutral font-inter px-10">
+        <p className=" text-center text-xs   text-neutral font-inter px-10 mb-3">
           Initialize your system credentials to begin managing editorial
           workflows.
         </p>
@@ -47,7 +47,7 @@ const RegisterForm = () => {
           label="Full Name : "
           type="text"
           placeholder="Jhon Doe"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
+          className=" w-full outline outline-zinc-400 px-2 py-1 rounded-lg text-sm text-neutral font-inter mb-3"
         />
         <RHFInput
           message={errors?.name?.message}
@@ -56,7 +56,7 @@ const RegisterForm = () => {
           label="User Name : "
           type="text"
           placeholder="username"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
+          className=" w-full outline outline-zinc-400 px-2 py-1 rounded-lg text-sm text-neutral font-inter mb-3"
         />
         <RHFInput
           message={errors?.email?.message}
@@ -65,7 +65,7 @@ const RegisterForm = () => {
           label="Email Address : "
           type="email"
           placeholder="jhon@example.com"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
+          className=" w-full outline outline-zinc-400 px-2 py-1 rounded-lg text-sm text-neutral font-inter mb-3"
         />
         <RHFInput
           message={errors?.password?.message}
@@ -74,7 +74,7 @@ const RegisterForm = () => {
           label="Password : "
           type="password"
           placeholder="password"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
+          className=" w-full outline outline-zinc-400 px-2 py-1 rounded-lg text-sm text-neutral font-inter mb-3"
         />
         <RHFInput
           message={errors?.confirmPassword?.message}
@@ -83,13 +83,13 @@ const RegisterForm = () => {
           label="Confirm Password : "
           type="password"
           placeholder="password"
-          className=" outline outline-zinc-200 px-2 py-1 rounded-lg text-sm text-neutral font-inter"
+          className=" w-full outline outline-zinc-400 px-2 py-1 rounded-lg text-sm text-neutral font-inter mb-3"
         />
 
         <div className="flex justify-center mt-2">
           <Button
             type="submit"
-            className="cursor-pointer bg-violet-800  hover:bg-violet-600 text-tertiary rounded-full px-6 py-1 md:py-2 md:px-10 hover:-translate-y-0.5 active:translate-y-0.5  transition-all duration-100 mt-4 text-xs font-inter"
+            className="cursor-pointer bg-violet-800  hover:bg-violet-600 text-tertiary rounded-full px-6 py-1 md:py-2 md:px-10 hover:-translate-y-0.5 active:translate-y-0.5  transition-all duration-100  text-xs font-inter"
           >
             Register
           </Button>

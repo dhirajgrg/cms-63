@@ -14,34 +14,28 @@ interface IInputProps<
   control: Control<T>;
   name: Path<T>;
   label?: string;
-  labelRight?: string;
   message?: string;
 }
 
 const RHFInput = <T extends FieldValues>({
   control,
   label,
-  labelRight,
   name,
   message,
   ...rest
 }: Readonly<IInputProps<T>>) => {
   return (
-    <div className="flex flex-col mt-4">
-      {(label || labelRight) && (
-        <LabelForm className="flex justify-between items-center text-sm text-neutral font-inter capitalize">
-          <p>{label}</p>
-          <p className="text-xs text-violet-800 hover:text-violet-500 cursor-pointer">
-            {labelRight}
-          </p>
-        </LabelForm>
-      )}
+    <div className="flex flex-col md:flex-row  md:items-center">
+      <LabelForm className="w-full  md:w-1/3 text-sm text-neutral font-inter capitalize">
+        <p>{label}<sup className="text-red-600">*</sup></p>
+      </LabelForm>
+
       <Controller
         control={control}
         name={name}
         render={({ field }) => <InputForm {...field} {...rest} />}
       />
-      <span className="text-red-500 text-xs italic">{message}</span>
+      <span className="text-red-500 text-xs italic capitalize ml-2">{message}</span>
     </div>
   );
 };
